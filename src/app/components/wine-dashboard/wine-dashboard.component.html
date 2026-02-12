@@ -1,0 +1,12 @@
+<div class="grid mb-6">
+    <div *ngIf="chartData" class="col-12 md:col-6 lg:col-4">
+        <p-card header="Répartition par type" class="mb-4">
+            <div style="min-height: 300px" class="flex justify-content-center">
+                <p-chart *ngIf="bottles.length > 0 && chartData" type="pie" [data]="chartData" width="300px">
+                </p-chart>
+
+                <p *ngIf="bottles.length === 0">Chargement de la cave...</p>
+            </div>
+        </p-card>
+    </div>
+</div>
