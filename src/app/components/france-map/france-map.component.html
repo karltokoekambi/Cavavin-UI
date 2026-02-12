@@ -1,1 +1,17 @@
-<p>france-map works!</p>
+<div class="flex flex-column align-items-center bg-white p-4 border-round shadow-1">
+    <h3 class="mb-4">Répartition Géographique</h3>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="france-svg" style="max-width: 500px">
+        <path id="bordeaux" [attr.fill]="getRegionColor('bordeaux')" d="..." />
+        <path id="loire" [attr.fill]="getRegionColor('loire')" d="..." />
+        <path id="bourgogne" [attr.fill]="getRegionColor('bourgogne')" d="..." />
+    </svg>
+
+    <div class="mt-3 flex gap-4">
+        <div class="flex align-items-center"><span class="w-1rem h-1rem border-round mr-2"
+                style="background: #f1f5f9"></span> 0 bouteille</div>
+        <div class="flex align-items-center"><span class="w-1rem h-1rem border-round mr-2"
+                style="background: #94a3b8"></span> 1-5 bouteilles</div>
+        <div class="flex align-items-center"><span class="w-1rem h-1rem border-round mr-2"
+                style="background: #1e293b"></span> 5+ bouteilles</div>
+    </div>
+</div>

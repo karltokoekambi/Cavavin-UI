@@ -1,9 +1,15 @@
-<p-card header="Inventaire complet">
-    <p-table [value]="wines" [paginator]="true" [rows]="10">
+<div class="card p-4">
+    <div class="flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">Mon Inventaire</h2>
+        <p-button label="Ajouter un vin" icon="pi pi-plus" severity="success"></p-button>
+    </div>
+
+    <p-table [value]="wines" [paginator]="true" [rows]="10" styleClass="p-datatable-striped p-datatable-sm shadow-2"
+        [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
-                <th>Nom</th>
-                <th>Domaine</th>
+                <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="domaine">Domaine <p-sortIcon field="domaine"></p-sortIcon></th>
                 <th>Millésime</th>
                 <th>Région</th>
                 <th>Quantité</th>
@@ -11,12 +17,18 @@
         </ng-template>
         <ng-template pTemplate="body" let-wine>
             <tr>
-                <td>{{wine.name}}</td>
-                <td>{{wine.domaine}}</td>
-                <td>{{wine.vintage}}</td>
-                <td>{{wine.region}}</td>
-                <td>{{wine.quantity}}</td>
+                <td>{{ wine.name }}</td>
+                <td>{{ wine.domaine }}</td>
+                <td>{{ wine.vintage }}</td>
+                <td>
+                    <p-tag [value]="wine.region" severity="secondary"></p-tag>
+                </td>
+                <td>
+                    <span [class]="wine.quantity > 0 ? 'font-bold' : 'text-red-500'">
+                        {{ wine.quantity }}
+                    </span>
+                </td>
             </tr>
         </ng-template>
     </p-table>
-</p-card>
+</div>
