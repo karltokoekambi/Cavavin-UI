@@ -1,12 +1,3 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
@@ -176,21 +167,46 @@
 </style>
 
 <main class="main">
-  <h1>Ma Cave à Vin</h1>
-  <ul>
-    <li *ngFor="let bottle of bottles">
-      {{ bottle.name }} - {{ bottle.domaine }} ({{ bottle.vintage }})
-    </li>
-  </ul>
+  <div class="p-4">
+    <h1 class="text-3xl font-bold mb-4">Ma Cave à Vin 🍷</h1>
+
+    <div class="grid mb-6">
+      <div *ngIf="chartData" class="col-12 md:col-6 lg:col-4">
+        <p-card header="Répartition par type" class="mb-4">
+          <div style="min-height: 300px" class="flex justify-content-center">
+            <p-chart *ngIf="bottles.length > 0 && chartData" type="pie" [data]="chartData" width="300px">
+            </p-chart>
+
+            <p *ngIf="bottles.length === 0">Chargement de la cave...</p>
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div *ngFor="let bottle of bottles" class="col-12 md:col-6 lg:col-3">
+        <p-card [header]="bottle.name" [subheader]="bottle.domaine" class="wine-card">
+          <ng-template pTemplate="header">
+            <div class="flex justify-content-end p-2">
+              <p-tag [value]="bottle.type" [severity]="getSeverity(bottle.type)"></p-tag>
+            </div>
+          </ng-template>
+
+          <div class="wine-details">
+            <p><strong>Année :</strong> {{ bottle.vintage }}</p>
+            <p><strong>Région :</strong> {{ bottle.region }}</p>
+            <p><strong>Quantité :</strong> {{ bottle.quantity }}</p>
+          </div>
+
+          <ng-template pTemplate="footer">
+            <button pButton icon="pi pi-heart" [class.p-button-danger]="bottle.isFavorite"
+              class="p-button-rounded p-button-text"></button>
+            <button pButton label="Détails" icon="pi pi-search" class="p-button-outlined p-button-sm ml-2"></button>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 
 <router-outlet></router-outlet>
