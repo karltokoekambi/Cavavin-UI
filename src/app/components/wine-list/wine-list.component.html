@@ -1,3 +1,11 @@
+<p-dialog [(visible)]="displayDialog" [header]="selectedWine ? 'Modifier le vin' : 'Nouveau vin'" [modal]="true"
+    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+    <app-wine-form [wine]="selectedWine" [isEditMode]="!!selectedWine" (onSave)="saveWine($event)"
+        (onCancel)="displayDialog = false">
+    </app-wine-form>
+</p-dialog>
+
 <div class="bg-primary p-4 mb-4 border-round-xl shadow-2">
     <div class="flex justify-content-between align-items-center">
         <div>
@@ -5,7 +13,7 @@
             <p class="m-0 mt-1 opacity-80 text-sm">Gestion et recherche de vos références</p>
         </div>
         <button pButton label="Ajouter un vin" icon="pi pi-plus"
-            class="p-button-outlined p-button-secondary text-white border-white"></button>
+            class="p-button-outlined p-button-secondary text-white border-white" (click)="showAddDialog()"></button>
     </div>
 </div>
 
@@ -46,7 +54,8 @@
                     </span>
                 </td>
                 <td>
-                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded"></button>
+                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded"
+                        (click)="showEditDialog(wine)"></button>
                 </td>
             </tr>
         </ng-template>

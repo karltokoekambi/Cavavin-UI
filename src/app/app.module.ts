@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 //PrimeNG
@@ -10,19 +11,24 @@ import { ChartModule } from 'primeng/chart';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 //Components
 import { AppComponent } from './app.component';
 import { WineDashboardComponent } from './components/wine-dashboard/wine-dashboard.component';
 import { WineListComponent } from './components/wine-list/wine-list.component';
 import { FranceMapComponent } from './components/france-map/france-map.component';
+import { WineFormComponent } from './wine-form/wine-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WineDashboardComponent,
     WineListComponent,
-    FranceMapComponent
+    FranceMapComponent,
+    WineFormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,11 @@ import { FranceMapComponent } from './components/france-map/france-map.component
     ChartModule,
     TagModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    DialogModule,
+    InputTextModule,
+    InputNumberModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideHttpClient(withFetch())

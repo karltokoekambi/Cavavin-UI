@@ -14,3 +14,4 @@ export interface WineBottle {
     isFavorite: boolean;
     quantity: number;
 }
+

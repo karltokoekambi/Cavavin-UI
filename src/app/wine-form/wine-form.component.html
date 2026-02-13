@@ -1,0 +1,36 @@
+<form [formGroup]="wineForm" (ngSubmit)="submit()" class="p-fluid grid">
+    <div class="field col-12">
+        <label for="name" class="font-bold">Nom du vin</label>
+        <input id="name" type="text" pInputText formControlName="name" placeholder="Ex: Château Margaux" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+        <label for="domain" class="font-bold">Domaine</label>
+        <input id="domain" type="text" pInputText formControlName="domain" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+        <label for="vintage" class="font-bold">Millésime</label>
+        <input id="vintage" type="text" pInputText formControlName="vintage" placeholder="YYYY" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+        <label for="region" class="font-bold">Région (Code Dép.)</label>
+        <input id="region" type="text" pInputText formControlName="region" placeholder="Ex: 33" />
+    </div>
+
+    <div class="field col-12 md:col-6">
+        <label for="quantity" class="font-bold">Quantité</label>
+        <p-inputNumber formControlName="quantity" [showButtons]="true" buttonLayout="horizontal"
+            spinnerMode="horizontal" decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary"
+            incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" [min]="1">
+        </p-inputNumber>
+    </div>
+
+    <div class="col-12 flex justify-content-end gap-2 mt-4">
+        <button pButton type="button" label="Annuler" icon="pi pi-times" class="p-button-text p-button-secondary"
+            (click)="cancel()"></button>
+        <button pButton type="submit" [label]="isEditMode ? 'Modifier' : 'Ajouter'" icon="pi pi-check"
+            [disabled]="wineForm.invalid" class="bg-primary"></button>
+    </div>
+</form>
