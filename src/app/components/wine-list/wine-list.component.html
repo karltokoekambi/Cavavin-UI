@@ -1,34 +1,54 @@
-<div class="card p-4">
-    <div class="flex justify-content-between align-items-center mb-4">
-        <h2 class="m-0">Mon Inventaire</h2>
-        <p-button label="Ajouter un vin" icon="pi pi-plus" severity="success"></p-button>
+<div class="bg-primary p-4 mb-4 border-round-xl shadow-2">
+    <div class="flex justify-content-between align-items-center">
+        <div>
+            <h1 class="text-3xl font-bold m-0">Inventaire Complet</h1>
+            <p class="m-0 mt-1 opacity-80 text-sm">Gestion et recherche de vos références</p>
+        </div>
+        <button pButton label="Ajouter un vin" icon="pi pi-plus"
+            class="p-button-outlined p-button-secondary text-white border-white"></button>
     </div>
+</div>
 
-    <p-table [value]="wines" [paginator]="true" [rows]="10" styleClass="p-datatable-striped p-datatable-sm shadow-2"
-        [tableStyle]="{ 'min-width': '50rem' }">
+<p-card styleClass="shadow-2 border-top-3" [style]="{ 'border-top-color': 'var(--primary-color)' }">
+    <p-table #dt [value]="wines" [paginator]="true" [rows]="10" [globalFilterFields]="['name', 'domaine', 'region']"
+        styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-end">
+                <i class="pi pi-search"></i>
+                <span class="p-input-icon-left">
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Rechercher un vin..." />
+                </span>
+            </div>
+        </ng-template>
+
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name">Nom <p-sortIcon field="name"></p-sortIcon></th>
                 <th pSortableColumn="domaine">Domaine <p-sortIcon field="domaine"></p-sortIcon></th>
-                <th>Millésime</th>
-                <th>Région</th>
-                <th>Quantité</th>
+                <th pSortableColumn="vintage">Millésime <p-sortIcon field="vintage"></p-sortIcon></th>
+                <th pSortableColumn="region">Région/Dép. <p-sortIcon field="region"></p-sortIcon></th>
+                <th pSortableColumn="quantity">Quantité <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th style="width: 5rem"></th>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="body" let-wine>
             <tr>
-                <td>{{ wine.name }}</td>
-                <td>{{ wine.domaine }}</td>
-                <td>{{ wine.vintage }}</td>
+                <td class="font-bold">{{wine.name}}</td>
+                <td>{{wine.domaine}}</td>
+                <td><p-tag [value]="wine.vintage" severity="secondary"></p-tag></td>
+                <td>{{wine.region}}</td>
                 <td>
-                    <p-tag [value]="wine.region" severity="secondary"></p-tag>
+                    <span [class]="wine.quantity <= 2 ? 'text-red-600 font-bold' : ''">
+                        {{wine.quantity}}
+                    </span>
                 </td>
                 <td>
-                    <span [class]="wine.quantity > 0 ? 'font-bold' : 'text-red-500'">
-                        {{ wine.quantity }}
-                    </span>
+                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
-</div>
+</p-card>
