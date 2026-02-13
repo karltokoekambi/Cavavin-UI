@@ -1,11 +1,25 @@
-<div class="grid mb-6">
-    <div *ngIf="chartData" class="col-12 md:col-6 lg:col-4">
-        <p-card header="Répartition par type" class="mb-4">
-            <div style="min-height: 300px" class="flex justify-content-center">
+<div class="bg-primary p-5 mb-4 border-round-xl shadow-2">
+    <h1 class="text-4xl font-bold m-0">Tableau de Bord</h1>
+</div>
+
+<div class="grid">
+    <div class="col-12 lg:col-8">
+        <p-card header="Répartition par Vignoble" styleClass="shadow-2 border-top-3"
+            [style]="{'border-top-color': 'var(--primary-color)'}">
+            <app-france-map [wines]="bottles"></app-france-map>
+        </p-card>
+    </div>
+
+    <div class="col-12 lg:col-4 text-center">
+        <p-card header="État de la Cave" styleClass="shadow-2 border-top-3"
+            [style]="{'border-top-color': 'var(--primary-color)'}">
+            <div class="py-4border-round bg-secondary flex align-items-center justify-content-center">
                 <p-chart *ngIf="bottles.length > 0 && chartData" type="pie" [data]="chartData" width="300px">
                 </p-chart>
-
-                <p *ngIf="bottles.length === 0">Chargement de la cave...</p>
+            </div>
+            <div class="py-4 border-round bg-secondary">
+                <span class="text-6xl font-bold" style="color: var(--primary-color)">{{ totalBottles }}</span>
+                <p class="text-gray-600 font-medium uppercase">Bouteilles</p>
             </div>
         </p-card>
     </div>

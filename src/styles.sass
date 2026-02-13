@@ -1,0 +1,27 @@
+$wine-primary: #991b1b    // Equivalent red-800
+$wine-primary-dark: #7f1d1d // Equivalent red-900
+$wine-surface: #f9fafb    // Equivalent gray-50
+$wine-text: #1f2937       // Equivalent gray-800
+
+:root
+  --primary-color: #{$wine-primary}
+  --primary-color-text: #ffffff
+  --surface-ground: #{$wine-surface}
+  --text-color: #{$wine-text}
+
+@import "primeflex/primeflex.css"
+@import "primeng/resources/themes/lara-light-blue/theme.css"
+@import "primeng/resources/primeng.min.css"
+@import "primeicons/primeicons.css"
+
+.bg-primary
+  background-color: var(--primary-color) !important
+  color: var(--primary-color-text) !important
+
+.bg-secondary
+  background-color: var(--surface-ground) !important
+
+body
+  margin: 0
+  font-family: var(--font-family)
+  background-color: var(--surface-ground)

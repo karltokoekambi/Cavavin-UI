@@ -16,13 +16,18 @@ export class WineDashboardComponent implements OnInit {
   constructor(private wineService: WineService) { }
 
   chartData: any;
+  chartOptions: any;
+  totalBottles: number = 0;
 
   ngOnInit(): void {
     this.wineService.getBottles().subscribe({
       next: (data) => {
         this.bottles = data;
+        this.totalBottles = this.bottles.reduce((sum, b) => sum + b.quantity, 0);
+
         this.prepareChartData();
-      }
+      },
+      error: (err) => console.error('Erreur lors de la récupération des vins', err)
     });
   }
   prepareChartData() {
